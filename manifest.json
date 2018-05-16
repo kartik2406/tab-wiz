@@ -1,10 +1,8 @@
 {
     "manifest_version": 2,
-
-    "name": "First Plugin",
-    "description": "This is a test extension",
-    "version": "1.0",
-
+    "name": "TabWiz",
+    "description": "Tab Wizard",
+    "version": "1.1",
     "browser_action": {
         "default_icon": "./icons/tab_wiz_48.png"
     },
@@ -15,7 +13,13 @@
     "permissions": [
         "tabs",
         "activeTab",
-        "management"
+        "management",
+        "contextMenus"
     ],
+    "icons": {
+        "16": "./icons/tab_wiz_48.png",
+        "48": "./icons/tab_wiz_48.png",
+        "128": "./icons/tab_wiz_144.png"
+    },
     "content_security_policy": "script-src 'self' https://unpkg.com; object-src 'self'"
 }

@@ -18,13 +18,10 @@ function getCurrentTab() {
     });
 }
 
-let tabDetails;
+let tabDetails, globalPort;
 
-chrome.browserAction.onClicked.addListener(async function (tab) {
-    tabDetails = await getCurrentTab();
+function openExtensionTab() {
     let url = chrome.extension.getURL('popup.html');
-
-    //port.postMessage(tabDetails);
     chrome.tabs.query({
         url
     }, function (tabs) {
@@ -33,7 +30,7 @@ chrome.browserAction.onClicked.addListener(async function (tab) {
             chrome.tabs.update(extTab.id, {
                 active: true
             });
-           
+
         } else {
             //open new tab
             chrome.tabs.create({
@@ -42,11 +39,16 @@ chrome.browserAction.onClicked.addListener(async function (tab) {
             });
         }
     });
+}
+chrome.browserAction.onClicked.addListener(async function (tab) {
+    tabDetails = await getCurrentTab();
+      openExtensionTab();
 
 });
 
 chrome.extension.onConnect.addListener(function (port) {
     console.log("Connected .....");
+    globalPort = port;
     port.onMessage.addListener(function (msg) {
         console.log("message recieved" + msg);
         switch (msg) {
@@ -60,3 +62,19 @@ chrome.extension.onConnect.addListener(function (port) {
         }
     });
 })
+
+async function addTab() {
+    tabDetails = await getCurrentTab();
+    let port = chrome.extension.connect({
+        name: "Sample Communication"
+    });
+    openExtensionTab();
+    
+    port.postMessage(tabDetails);
+}
+chrome.contextMenus.create({
+    id: '1',
+    title: "Add Page to TabWiz",
+    contexts: ["all"]
+});
+chrome.contextMenus.onClicked.addListener(addTab);
