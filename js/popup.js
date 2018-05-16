@@ -1,3 +1,26 @@
+// communicating with background script
+var port = chrome.extension.connect({
+    name: "Sample Communication"
+});
+port.onMessage.addListener(function (link) {
+    console.log("message recieved", link);
+    addLink(link);
+    port.postMessage('CLEAR');
+});
+
+chrome.tabs.onUpdated.addListener(
+    function (tabId, changeInfo, tab) {
+        console.log('updated from contentscript');
+        port.postMessage("GET");
+    }
+);
+chrome.tabs.onActivated.addListener(
+    function (tabId, changeInfo, tab) {
+        console.log('tab activated');
+        port.postMessage("GET");
+    }
+);
+
 //store
 let links = [];
 let db = new Dexie("one_tab");
@@ -12,17 +35,6 @@ function save(link) {
 
 function deleteFromDB(url) {
     linkStore.delete(url);
-}
-
-function getCurrentTab() {
-    return new Promise((resolve, reject) => {
-        chrome.tabs.query({
-            active: true,
-            currentWindow: true
-        }, function (tabs) {
-            return (tabs && tabs.length > 0) ? resolve(tabs[0]) : reject(null);
-        })
-    });
 }
 
 function generateListHTML(list) {
@@ -55,7 +67,6 @@ function setListView() {
     deleteBtns.forEach(btn => {
         let link = btn.previousElementSibling;
         let url = link.getAttribute('href');
-        console.log(link.getAttribute('href'));
         btn.addEventListener('click', deleteLink.bind({
             url
         }));
@@ -68,19 +79,11 @@ function linkExists(link) {
 }
 async function init() {
     links = await linkStore.toArray();
-    console.log(links);
     setListView();
 }
 init();
-
-async function addLink() {
-    let tab = await getCurrentTab();
-    let link = {
-        favIconUrl: tab.favIconUrl,
-        title: tab.title,
-        url: tab.url
-    }
-    console.log(linkExists(link));
+async function addLink(link) {
+    await init();
     if (!linkExists(link)) {
         console.log('Tab url', link);
         try {
@@ -102,6 +105,3 @@ async function deleteLink() {
         console.log('error while deleting');
     }
 }
-
-let addBtn = document.getElementById('addBtn');
-addBtn.addEventListener('click', addLink);
