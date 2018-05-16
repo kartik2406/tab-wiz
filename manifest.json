@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+
+    "name": "First Plugin",
+    "description": "This is a test extension",
+    "version": "1.0",
+
+    "browser_action": {
+        "default_icon": "icon.png"
+    },
+    "background": {
+        "scripts": ["./js/background.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "activeTab",
+        "management"
+    ],
+    "content_security_policy": "script-src 'self' https://unpkg.com; object-src 'self'"
+}
