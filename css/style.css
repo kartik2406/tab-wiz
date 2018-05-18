@@ -47,6 +47,10 @@ body {
     color: #3580d6;
 }
 
+.app-controls {
+    padding-left: 5%;
+}
+
 .list {
     display: grid;
     grid-template-columns: 1fr;
@@ -129,6 +133,13 @@ body {
     outline: none;
     /* Outline that is added when clicked on a button*/
     box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.24);
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/* button with rounded corners */
+
+.btn-round-corners {
+    border-radius: 5%;
 }
 
 /* Button states */
@@ -148,6 +159,11 @@ body {
 .btn-primary {
     color: #f5f5f5;
     background-color: dodgerblue;
+}
+
+.btn-danger {
+    color: #f5f5f5;
+    background-color: #f44336;
 }
 
 .controls {

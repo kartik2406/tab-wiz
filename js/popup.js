@@ -45,6 +45,10 @@ function deleteFromDB(url) {
     linkStore.delete(url);
 }
 
+function deleteAllFromDB() {
+    linkStore.clear();
+}
+
 function generateListHTML(list) {
     let listHtml = '';
     list.forEach(item => {
@@ -108,7 +112,7 @@ async function addLink(link) {
 
 async function addLinks(tabLinks) {
     console.log('tabLinks', tabLinks)
-    
+
     await init();
     console.log(links);
     let linkUrls = links.map(link => link.url);
@@ -118,7 +122,7 @@ async function addLinks(tabLinks) {
     await saveAll(newLinks);
     links = links.concat(newLinks);
     console.log('links', links)
-    
+
     setListView();
 }
 async function deleteLink() {
@@ -130,3 +134,21 @@ async function deleteLink() {
         console.log('error while deleting');
     }
 }
+async function deleteAll() {
+    if (links.length) {
+        let deleteConfirm = confirm('Do you really want to delete all the links?');
+
+        if (deleteConfirm) {
+            try {
+                await deleteAllFromDB();
+                links = [];
+                setListView();
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
+}
+
+let deleteAllBtn = document.getElementById('deleteAll');
+deleteAllBtn.addEventListener('click', deleteAll);
