@@ -1,3 +1,7 @@
+let port = chrome.extension.connect({
+    name: "Sample Communication"
+});
+
 function getCurrentTab() {
     return new Promise((resolve, reject) => {
         chrome.tabs.query({
@@ -18,7 +22,16 @@ function getCurrentTab() {
     });
 }
 
-let tabDetails, globalPort;
+function getAllTabs(){
+    return new Promise((resolve, reject) => {
+        chrome.tabs.query({
+        }, function (tabs) {
+
+            resolve(tabs);
+        })
+    });
+}
+let tabDetails;
 
 function openExtensionTab() {
     let url = chrome.extension.getURL('popup.html');
@@ -41,14 +54,13 @@ function openExtensionTab() {
     });
 }
 chrome.browserAction.onClicked.addListener(async function (tab) {
-    tabDetails = await getCurrentTab();
-      openExtensionTab();
+    tabDetails = await getAllTabs();
+    openExtensionTab();
 
 });
 
 chrome.extension.onConnect.addListener(function (port) {
     console.log("Connected .....");
-    globalPort = port;
     port.onMessage.addListener(function (msg) {
         console.log("message recieved" + msg);
         switch (msg) {
@@ -65,11 +77,9 @@ chrome.extension.onConnect.addListener(function (port) {
 
 async function addTab() {
     tabDetails = await getCurrentTab();
-    let port = chrome.extension.connect({
-        name: "Sample Communication"
-    });
+
     openExtensionTab();
-    
+
     port.postMessage(tabDetails);
 }
 chrome.contextMenus.create({

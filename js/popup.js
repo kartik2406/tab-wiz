@@ -2,9 +2,13 @@
 var port = chrome.extension.connect({
     name: "Sample Communication"
 });
-port.onMessage.addListener(function (link) {
-    console.log("message recieved", link);
-    addLink(link);
+port.onMessage.addListener(function (data) {
+    console.log("message recieved", data);
+    if (data.length) {
+        addLinks(data);
+    } else {
+        addLink(data);
+    }
     port.postMessage('CLEAR');
 });
 
@@ -31,6 +35,10 @@ let linkStore = db.links;
 
 function save(link) {
     linkStore.put(link);
+}
+
+function saveAll(links) {
+    linkStore.bulkAdd(links);
 }
 
 function deleteFromDB(url) {
@@ -96,6 +104,21 @@ async function addLink(link) {
     }
 }
 
+async function addLinks(tabLinks) {
+    console.log('tabLinks', tabLinks)
+    
+    await init();
+    console.log(links);
+    let linkUrls = links.map(link => link.url);
+    console.log('Link urls', linkUrls)
+    let newLinks = tabLinks.filter(link => !linkUrls.includes(link.url));
+    console.log('newLinks', newLinks)
+    await saveAll(newLinks);
+    links = links.concat(newLinks);
+    console.log('links', links)
+    
+    setListView();
+}
 async function deleteLink() {
     try {
         await deleteFromDB(this.url);
