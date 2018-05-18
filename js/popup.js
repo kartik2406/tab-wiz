@@ -3,7 +3,7 @@ var port = chrome.extension.connect({
     name: "Sample Communication"
 });
 port.onMessage.addListener(function (data) {
-    console.log("message recieved", data);
+    // console.log("message recieved", data);
     if (data.length) {
         addLinks(data);
     } else {
@@ -14,13 +14,11 @@ port.onMessage.addListener(function (data) {
 
 chrome.tabs.onUpdated.addListener(
     function (tabId, changeInfo, tab) {
-        console.log('updated from contentscript');
         port.postMessage("GET");
     }
 );
 chrome.tabs.onActivated.addListener(
     function (tabId, changeInfo, tab) {
-        console.log('tab activated');
         port.postMessage("GET");
     }
 );
@@ -85,6 +83,17 @@ function setListView() {
             url
         }));
     })
+    let appControlBtns = document.querySelectorAll('.app-controls button')
+    if (links.length) {
+        appControlBtns.forEach(btn => {
+            btn.classList.remove('disabled');
+        })
+    } else {
+        appControlBtns.forEach(btn => {
+            btn.classList.add('disabled');
+        })
+    }
+
 }
 
 function linkExists(link) {
@@ -99,7 +108,6 @@ init();
 async function addLink(link) {
     await init();
     if (!linkExists(link)) {
-        console.log('Tab url', link);
         try {
             await save(link);
             links.push(link);
@@ -111,18 +119,12 @@ async function addLink(link) {
 }
 
 async function addLinks(tabLinks) {
-    console.log('tabLinks', tabLinks)
 
     await init();
-    console.log(links);
     let linkUrls = links.map(link => link.url);
-    console.log('Link urls', linkUrls)
     let newLinks = tabLinks.filter(link => !linkUrls.includes(link.url));
-    console.log('newLinks', newLinks)
     await saveAll(newLinks);
     links = links.concat(newLinks);
-    console.log('links', links)
-
     setListView();
 }
 async function deleteLink() {
@@ -136,9 +138,11 @@ async function deleteLink() {
 }
 async function deleteAll() {
     if (links.length) {
-        let deleteConfirm = confirm('Do you really want to delete all the links?');
+        let deleteConfirm;
+        if (this.showPrompt)
+            deleteConfirm = confirm('Do you really want to delete all the links?');
 
-        if (deleteConfirm) {
+        if (deleteConfirm || !this.showPrompt) {
             try {
                 await deleteAllFromDB();
                 links = [];
@@ -149,6 +153,22 @@ async function deleteAll() {
         }
     }
 }
+async function restoreAll() {
+    if (links.length) {
+        links.forEach(link => {
+            chrome.tabs.create({
+                url: link.url
+            });
+        });
+        await deleteAll();
+        window.close();
+    }
+}
 
 let deleteAllBtn = document.getElementById('deleteAll');
-deleteAllBtn.addEventListener('click', deleteAll);
+deleteAllBtn.addEventListener('click', deleteAll.bind({
+    showPrompt: true
+}));
+
+let restoreAllBtn = document.getElementById('restoreAll');
+restoreAllBtn.addEventListener('click', restoreAll);

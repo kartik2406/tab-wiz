@@ -51,6 +51,11 @@ body {
     padding-left: 5%;
 }
 
+.app-controls>* {
+    margin-top: 10px;
+    width: 130px;
+}
+
 .list {
     display: grid;
     grid-template-columns: 1fr;
@@ -164,6 +169,13 @@ body {
 .btn-danger {
     color: #f5f5f5;
     background-color: #f44336;
+}
+
+/* Disabled button */
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .controls {
