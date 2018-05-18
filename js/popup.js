@@ -96,6 +96,18 @@ function setListView() {
 
 }
 
+function closeTab(url) {
+    chrome.tabs.query({
+        url
+    }, function (tabs) {
+        let tabIDs = tabs.map(tab => tab.id);
+        chrome.tabs.remove(tabIDs, function () {
+            console.log('tabs closed');
+
+        })
+    })
+}
+
 function linkExists(link) {
 
     return links.find(item => item.url == link.url) ? true : false;
@@ -106,6 +118,7 @@ async function init() {
 }
 init();
 async function addLink(link) {
+    closeTab(link.url);
     await init();
     if (!linkExists(link)) {
         try {
@@ -119,7 +132,10 @@ async function addLink(link) {
 }
 
 async function addLinks(tabLinks) {
-
+    tabLinks.forEach(tab => {
+        console.table(tab);
+        closeTab(tab.url);
+    })
     await init();
     let linkUrls = links.map(link => link.url);
     let newLinks = tabLinks.filter(link => !linkUrls.includes(link.url));
