@@ -72,6 +72,8 @@ function setListView() {
     list.innerHTML = generateListHTML(links);
     let deleteBtns = document.querySelectorAll('.delete-icon');
 
+    let tabNumber = document.querySelector('.tab-number');
+    tabNumber.textContent = links.length;
     deleteBtns.forEach(btn => {
         let link = btn.previousElementSibling;
         let url = link.getAttribute('href');

@@ -6,17 +6,48 @@
 html,
 body {
     background-color: #f5f5f5;
+    color: var(--text-color);
 }
 
 .container {
-    display: block;
+    display: grid;
     height: auto;
-    margin-left: 15%;
-    margin-right: 15%;
+    grid-template-columns: 15% 1fr 15%;
+}
+
+.left {
+    border-right: 2ps dotted black;
+}
+
+.app-logo {
+    padding-left: 10%;
+}
+
+.app-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.app-info .app-name {
+    align-self: center;
+    font-family: 'Lobster', cursive;
+    padding-left: 5%;
+    color: #3580d6;
+    font-size: -webkit-xxx-large;
+    width: 100%;
+}
+
+.tab-info {
+    padding-left: 12%;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 20px;
+}
+
+.tab-number {
+    color: #3580d6;
 }
 
 .list {
-  
     display: grid;
     grid-template-columns: 1fr;
     list-style-type: none;
@@ -36,6 +67,7 @@ body {
     color: var(--text-color);
     min-height: 50px;
     transition: 0.4s;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .list-item .icon {
@@ -118,7 +150,7 @@ body {
     background-color: dodgerblue;
 }
 
-.controls{
+.controls {
     display: grid;
     grid-template-columns: 1fr 50px;
 }

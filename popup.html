@@ -8,17 +8,35 @@
     <title>TabWiz</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <ul id='list' class="list">
-
-        </ul>
-        <div class="controls">
-            <div class="message"></div>
+        <div class="left">
+            <div class="app-info">
+                <img class="app-logo" src="/icons/tab_wiz_96.png" alt="APP icon">
+                <h1 class="app-name">TabWiz</h1>
+            </div>
+            <div class="tab-info">
+                <h2><span class="tab-number">0</span> tabs</h2>
+            </div>
         </div>
+        <div class="mid">
+            <ul id='list' class="list">
+
+            </ul>
+            <div class="controls">
+                <div class="message"></div>
+            </div>
+        </div>
+        <div class="right">
+
+        </div>
+
     </div>
     <script src="js/popup.js"></script>
 
