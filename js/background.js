@@ -99,7 +99,21 @@ async function addTab() {
 }
 chrome.contextMenus.create({
   id: "1",
+  title: "Open TabWiz",
+  contexts: ["all"]
+});
+chrome.contextMenus.create({
+  id: "2",
   title: "Add Page to TabWiz",
   contexts: ["all"]
 });
-chrome.contextMenus.onClicked.addListener(addTab);
+chrome.contextMenus.onClicked.addListener(function(option) {
+  switch (option.menuItemId) {
+    case "1":
+      openExtensionTab();
+      break;
+    case "2":
+      addTab();
+      break;
+  }
+});
