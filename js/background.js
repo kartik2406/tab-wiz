@@ -15,6 +15,7 @@ function getCurrentTab() {
           reject(null);
         }
         let link = {
+          id: tab.id,
           favIconUrl: tab.favIconUrl,
           title: tab.title,
           url: tab.url
@@ -27,13 +28,22 @@ function getCurrentTab() {
 
 function getAllTabs() {
   return new Promise((resolve, reject) => {
-    chrome.tabs.query({ url: [
-        "http://*/*",
-        "https://*/*"
-        
-    ] }, function(tabs) {
-      resolve(tabs);
-    });
+    chrome.tabs.query(
+      {
+        url: ["http://*/*", "https://*/*"]
+      },
+      function(tabs) {
+        let newTabs = tabs.map(tab => {
+          return {
+            id: tab.id,
+            favIconUrl: tab.favIconUrl,
+            title: tab.title,
+            url: tab.url
+          };
+        });
+        resolve(newTabs);
+      }
+    );
   });
 }
 let tabDetails;
