@@ -86,6 +86,7 @@ function setListView() {
       })
     );
   });
+
   let appControlBtns = document.querySelectorAll(".app-controls button");
   if (links.length) {
     appControlBtns.forEach(btn => {
@@ -152,12 +153,14 @@ async function deleteLink() {
   }
 }
 async function deleteAll() {
-  if (links.length) { //only if there are values in the links array
+  if (links.length) {
+    //only if there are values in the links array
     let deleteConfirm;
     if (this.showPrompt)
       deleteConfirm = confirm("Do you really want to delete all the links?");
 
-    if (deleteConfirm || !this.showPrompt) { // showPrompt if not set will delete without confirm box
+    if (deleteConfirm || !this.showPrompt) {
+      // showPrompt if not set will delete without confirm box
       try {
         await deleteAllFromDB();
         links = [];
@@ -190,3 +193,12 @@ deleteAllBtn.addEventListener(
 
 let restoreAllBtn = document.getElementById("restoreAll");
 restoreAllBtn.addEventListener("click", restoreAll);
+
+let exportBtn = document.getElementById("export");
+exportBtn.addEventListener("click", function() {
+  var file = new Blob([JSON.stringify(links)], { type: "text/json" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(file);
+  a.download = "tabs.json"; //file name
+  a.click();
+});

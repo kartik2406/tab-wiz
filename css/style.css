@@ -1,97 +1,97 @@
 :root {
-    --link-color: #1565c0;
-    --text-color: #333;
+  --link-color: #1565c0;
+  --text-color: #333;
 }
 
 html,
 body {
-    background-color: #f5f5f5;
-    color: var(--text-color);
+  background-color: #f5f5f5;
+  color: var(--text-color);
 }
 
 .container {
-    display: grid;
-    height: auto;
-    grid-template-columns: 15% 1fr 15%;
+  display: grid;
+  height: auto;
+  grid-template-columns: 15% 1fr 15%;
 }
 
 .left {
-    border-right: 2ps dotted black;
+  border-right: 2ps dotted black;
 }
 
 .app-logo {
-    padding-left: 10%;
+  padding-left: 10%;
 }
 
 .app-info {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .app-info .app-name {
-    align-self: center;
-    font-family: 'Lobster', cursive;
-    padding-left: 5%;
-    color: #3580d6;
-    font-size: -webkit-xxx-large;
-    width: 100%;
+  align-self: center;
+  font-family: "Lobster", cursive;
+  padding-left: 5%;
+  color: #3580d6;
+  font-size: -webkit-xxx-large;
+  width: 100%;
 }
 
 .tab-info {
-    padding-left: 12%;
-    font-family: 'Kaushan Script', cursive;
-    font-size: 20px;
+  padding-left: 12%;
+  font-family: "Kaushan Script", cursive;
+  font-size: 20px;
 }
 
 .tab-number {
-    color: #3580d6;
+  color: #3580d6;
 }
 
 .app-controls {
-    padding-left: 5%;
+  padding-left: 5%;
 }
 
-.app-controls>* {
-    margin-top: 10px;
-    width: 130px;
+.app-controls > * {
+  margin-top: 10px;
+  width: 130px;
 }
 
 .list {
-    display: grid;
-    grid-template-columns: 1fr;
-    list-style-type: none;
-    padding-left: 0%;
+  display: grid;
+  grid-template-columns: 1fr;
+  list-style-type: none;
+  padding-left: 0%;
 }
 
 .list-item {
-    display: grid;
-    grid-template-columns: 19px 1fr 30px;
-    grid-gap: 10px;
-    padding-left: 2%;
-    margin-top: 3%;
-    border: 2px solid #d6dee0;
-    border-left: 8px solid #d6dee0;
-    background-color: white;
-    align-items: center;
-    color: var(--text-color);
-    min-height: 50px;
-    transition: 0.4s;
-    font-family: 'Josefin Sans', sans-serif;
+  display: grid;
+  grid-template-columns: 19px 1fr 30px;
+  grid-gap: 10px;
+  padding-left: 2%;
+  margin-top: 3%;
+  border: 2px solid #d6dee0;
+  border-left: 8px solid #d6dee0;
+  background-color: white;
+  align-items: center;
+  color: var(--text-color);
+  min-height: 50px;
+  transition: 0.4s;
+  font-family: "Josefin Sans", sans-serif;
 }
 
 .list-item .icon {
-    display: none;
+  display: none;
 }
 
 .list-item:hover {
-    transform: translateZ(-4px);
-    border-left: 8px solid var(--link-color);
-    transition: 0.4s;
+  transform: translateZ(-4px);
+  border-left: 8px solid var(--link-color);
+  transition: 0.4s;
 }
 
-.list-item:hover>.icon {
-    display: block;
-    transition: 0.3s;
+.list-item:hover > .icon {
+  display: block;
+  transition: 0.3s;
 }
 
 /* .list-item:active {
@@ -100,85 +100,90 @@ body {
 } */
 
 .link {
-    text-decoration: none;
-    font-size: 18px;
-    color: inherit;
+  text-decoration: none;
+  font-size: 18px;
+  color: inherit;
 }
 
 .favIcon {
-    width: 19px;
+  width: 19px;
 }
 
 .icon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .delete-icon {
-    color: red;
+  color: red;
 }
 
 .delete-icon:hover {
-    transform: scale(1.2);
-    transition: 0.3s;
+  transform: scale(1.2);
+  transition: 0.3s;
 }
 
 .delete-icon:active {
-    transform: translateY(4px);
+  transform: translateY(4px);
 }
 
 .btn {
-    cursor: pointer;
-    border: none;
-    /*remove the dedault css border*/
-    font-size: 20px;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    transition: 0.4s;
-    outline: none;
-    /* Outline that is added when clicked on a button*/
-    box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.24);
-    font-family: 'Josefin Sans', sans-serif;
+  cursor: pointer;
+  border: none;
+  /*remove the dedault css border*/
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.4s;
+  outline: none;
+  /* Outline that is added when clicked on a button*/
+  box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.24);
+  font-family: "Josefin Sans", sans-serif;
 }
 
 /* button with rounded corners */
 
 .btn-round-corners {
-    border-radius: 5%;
+  border-radius: 5%;
 }
 
 /* Button states */
 
 .btn:hover {
-    box-shadow: 4px 8px 10px 0 rgba(0, 0, 0, 0.24);
-    /*box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit;*/
+  box-shadow: 4px 8px 10px 0 rgba(0, 0, 0, 0.24);
+  /*box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit;*/
 }
 
 .btn:active {
-    transform: translateY(4px);
-    box-shadow: none;
+  transform: translateY(4px);
+  box-shadow: none;
 }
 
 /* Button colors */
 
 .btn-primary {
-    color: #f5f5f5;
-    background-color: dodgerblue;
+  color: #f5f5f5;
+  background-color: dodgerblue;
+}
+
+.btn-success {
+  color: #f5f5f5;
+  background-color: #4caf50;
 }
 
 .btn-danger {
-    color: #f5f5f5;
-    background-color: #f44336;
+  color: #f5f5f5;
+  background-color: #f44336;
 }
 
 /* Disabled button */
 
 .disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .controls {
-    display: grid;
-    grid-template-columns: 1fr 50px;
+  display: grid;
+  grid-template-columns: 1fr 50px;
 }
