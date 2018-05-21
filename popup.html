@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TabWiz</title>
-    <link rel="stylesheet" href="css/style.css">
+ 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
 </head>
 
@@ -26,12 +29,17 @@
                     <span class="tab-number">0</span> tabs</h2>
             </div>
             <div class="app-controls">
-                <button id="restoreAll" class="btn btn-success btn-round-corners">Restore All</button>
-                <button id="export" class="btn btn-primary btn-round-corners">Export</button>
-                <button id="deleteAll" class="btn btn-danger btn-round-corners">Delete All</button>
+                <button id="restoreAll" class="btn btn-success btn-round-corners can-be-disabled">Restore All</button>
+                <button id="export" class="btn btn-primary btn-round-corners can-be-disabled">Export</button>
+                <button id="import" class="btn btn-primary btn-round-corners">Import</button>
+                <button id="deleteAll" class="btn btn-danger btn-round-corners can-be-disabled">Delete All</button>
+                <!-- <input type="file" name="import" id="import"> -->
             </div>
         </div>
         <div class="mid">
+            <div class="search">
+                <input type="text" name="searchInput" id="searchInput" placeholder="Enter keywords to search for links">
+            </div>
             <ul id='list' class="list">
 
             </ul>

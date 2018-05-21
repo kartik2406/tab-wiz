@@ -56,11 +56,44 @@ body {
   width: 130px;
 }
 
+.search {
+  padding-left: 15%;
+  padding-right: 15%;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.search > input {
+  margin-top: 5%;
+  padding: 20px 15px;
+  outline: none;
+  border: 2px solid #d6dee0;
+  border-left: 8px solid #d6dee0;
+  border-right: 8px solid #d6dee0;
+  font-family: "Philosopher", sans-serif;
+  font-size: 24px;
+}
+
+.search > input:focus {
+  border-left: 8px solid var(--link-color);
+  border-right: 8px solid var(--link-color);
+  box-shadow: 8px 8px 10px #d6dee0;
+  transform: translateZ(-4px);
+}
+
+.search > input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 1; /* Firefox */
+  font-size: 32px;
+  font-family: "Cookie", cursive;
+}
+
 .list {
   display: grid;
   grid-template-columns: 1fr;
   list-style-type: none;
   padding-left: 0%;
+  transform: 0.4s;
 }
 
 .list-item {
